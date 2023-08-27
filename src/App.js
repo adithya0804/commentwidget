@@ -127,8 +127,10 @@ function App() {
     const parentComment = comments.filter(
       (item) => comment.parentCommentId === item.id
     );
-    if (parentComment.postedBy) {
-      const parentUser = getUserInfo(parentComment.postedBy);
+    if (parentComment.length > 0) {
+      console.log(parentComment);
+      const parentUser = getUserInfo(parentComment[0].postedBy);
+      console.log(parentUser);
       return {
         postedBy: userInfo,
         replyingTo: parentUser,
