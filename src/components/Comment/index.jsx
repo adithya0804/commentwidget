@@ -27,11 +27,13 @@ import CommentInput from "../CommentInput";
  *   JSX for comments  input component
  *
  */
-const Comment = ({ comment, onLike, onReply, comments, isReply, handleDelete, handleEdit}) => {
+const Comment = ({ comment, onLike, onReply, comments, isReply, handleDelete, handleEdit, sortBy}) => {
   const[userInfo, setUserInfo]=useState({});
   const[replyMode, setReplyMode]=useState(false);
   const [editMode, setEditMode]=useState(false);
-
+useEffect(()=>{
+  console.log(sortBy);
+}, [sortBy]);
   //to handle edit process
   const onEditClick=(commentId,replyText)=>{
     handleEdit(commentId, replyText);
@@ -87,7 +89,9 @@ setUserInfo({
     </div>
     {replyMode &&<div className={styles.replyInput}> <CommentInput  handleReply={handleReply} handleCancel={()=>{setReplyMode(false)}} commentId={comment.id}/> </div>}
     <div  >
-    {comments.filter(item=>item.parentCommentId===comment.id).map((reply) => (
+    {comments.filter(item=>item.parentCommentId===comment.id).sort((a,b)=>{
+        return b[sortBy]-a[sortBy]
+      }).map((reply) => (
              <div className={styles.replies} key={reply.id}>
           <Comment   
             comment={reply}
@@ -95,9 +99,9 @@ setUserInfo({
             onReply={onReply}
             comments={comments}
             handleDelete={handleDelete} 
-            handleEdit={handleEdit}    
-            commentId={reply.id}                          
+            handleEdit={handleEdit}                           
             isReply={true}
+            sortBy={sortBy}
           />
             </div>
         ))}
