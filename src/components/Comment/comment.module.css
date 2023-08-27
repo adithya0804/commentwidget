@@ -1,0 +1,91 @@
+*{
+    box-sizing: border-box;
+}
+.comment{
+    display: flex;
+    min-width: 200px;
+    max-width: 800px;
+    background-color:rgb(230, 233, 237);
+    max-height: 3rem;
+    white-space: normal;
+    margin: 1rem;
+}
+.container{
+    background-color: rgb(230, 233, 237);
+    min-width: 200px;
+    max-width: 800px;
+    padding: 1.7rem;
+    white-space: normal;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+
+}
+.profilePic{
+    height: 5rem;
+    border-radius: 50%;
+}
+.imageContainer{
+    width:15%;
+    margin-top: -0.5rem;
+}
+.header{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    gap: 1rem;
+    white-space: normal;
+    align-items: center;
+padding-bottom: 0;
+margin-bottom: 0;
+}
+.userName{
+    color: blue;
+    font-size: 1.2rem;
+    align-self: flex-start;
+}
+.commentText{
+white-space: normal ;
+font-size: 1rem;
+margin-top: 0rem;
+padding-top: 0rem;
+padding-left: 1rem;
+background-color: #eee;
+border-radius: 10px;
+}
+
+.replyingTo{
+color: grey;
+}
+.replies{
+    margin-left: 1rem;
+    padding: 1rem;
+    padding-bottom: 0;
+}
+.commentBody{
+    display: flex;
+   flex-direction:  column;
+    justify-content: center;
+    gap: 0.1rem;
+    white-space: normal;
+    padding-top: 0rem;
+    
+}
+.buttonGroup{
+    margin-top: -0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.replyInput{
+    margin-left: 1rem;
+}
+.buttons{
+    transition: all 0.3s;
+    padding: 0.3rem;
+    border-radius: 5px;
+}
+.buttons:hover{
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+}
