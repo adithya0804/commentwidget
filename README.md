@@ -49,8 +49,9 @@ The Comment Widget component is a React component that provides a user-friendly 
 
 - The uuid library was used to generate uuid when creating new components but this was done only for mock implementation and is not part of the component so this dependency can actually be removed and the necessary id can be passed based on our endpoint
 
-## Possible Imporovements Which Can Be Made
+## Possible Improvements Which Can Be Made
 
 - Pagination-feature can be added easily to the component to load only the specified number initially which can be passed as props and show a load more button to load the next list of comments
 - The buttons can be replaced with Icons to improve UX
-- The component can be made more responsive 
+- The component can be made more responsive
+- The sorting can also be handled by the API instead of the component
