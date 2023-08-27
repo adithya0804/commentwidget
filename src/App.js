@@ -4,6 +4,7 @@ import Dropdown from "./components/Dropdown";
 import { initialComments, userInfo } from "./utils/sampleData";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./app.module.css";
+import { getUserInfo } from "./utils/helper";
 
 const userOptions = [
   {
@@ -27,7 +28,7 @@ function App() {
   /**
    * Handles the editing of the comments
    *
-   * @param { objectId } commentId
+   * @param { uuid } commentId
    *   id of the comment to be edited
    *
    * @param { String } editText
@@ -49,7 +50,7 @@ function App() {
   /**
    * Handles the deleting of the comments
    *
-   * @param { objectId} commentId
+   * @param { uuid} commentId
    *   id of the comment to be deleted
    * *
    * @returns { null }
@@ -68,7 +69,7 @@ function App() {
   /**
    * Handles the replyin to the comments
    *
-   * @param { objectId} commentId
+   * @param { uuid} commentId
    *   id of the comment to which the comment is being replied to, null in the case of new comments
    * *
    * @param { String} replyText
@@ -99,7 +100,7 @@ function App() {
   /**
    * Handles the liking of the comments
    *
-   * @param {objectId} commentId
+   * @param {uuid} commentId
    *   id of the comment of which the likes have to be updated
    * *
    * @returns { null }
@@ -114,8 +115,30 @@ function App() {
     localStorage.setItem("comments", JSON.stringify(updatedComments));
     setComments(updatedComments);
   };
+
+  //to select the user
   const handleSelect = (value) => {
     setUser(value);
+  };
+
+  // This function is used to send the user information to the widget so that it can show the commeted user and the user to which the comment has been addressed if any
+  const mapUserInfo = (comment) => {
+    const userInfo = getUserInfo(comment?.postedBy);
+    const parentComment = comments.filter(
+      (item) => comment.parentCommentId === item.id
+    );
+    if (parentComment.postedBy) {
+      const parentUser = getUserInfo(parentComment.postedBy);
+      return {
+        postedBy: userInfo,
+        replyingTo: parentUser,
+      };
+    } else {
+      return {
+        postedBy: userInfo,
+        replyingTo: null,
+      };
+    }
   };
 
   return (
@@ -130,6 +153,7 @@ function App() {
         handleReply={handleReply}
         onLike={onLike}
         comments={comments}
+        getUserInfo={mapUserInfo}
       />
     </div>
   );

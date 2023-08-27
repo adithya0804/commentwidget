@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { getDuration, getUserInfo } from "./helper";
+import React, { useState } from "react";
 import styles from "./comment.module.css";
 import CommentInput from "../CommentInput";
-
+import { getDuration } from "./helper";
 /**
  *
- * @param { Function} handleEdit
+ *  * @param { Function} handleEdit
  *   function to handle edit process
  * *
  *  * @param { Function} onLike
@@ -14,26 +13,30 @@ import CommentInput from "../CommentInput";
  *  * @param { Function} onReply
  *   function to handle replying process
  * *
- *  *  * @param { Function} handleDelete
+ *  *  @param { Function} handleDelete
  *   function to handle deleting process
+ * *
+ *  *  @param { Function} getUserInfo
+ *   function to getUserInfo
  * *
  *  * @param { Boolean} isReply
  *   to check if it is main comment or reply to a comment
  * 
- * @param { Comment} comment
+ *  * @param { String} sortBy
+ *   to set the sort parameter
+ * 
+ * * @param { Comment} comment
  *    comment to be rendered
  * *
- * @returns { JSX.Element  }
+ * *@returns { JSX.Element  }
  *   JSX for comments  input component
  *
  */
-const Comment = ({ comment, onLike, onReply, comments, isReply, handleDelete, handleEdit, sortBy}) => {
-  const[userInfo, setUserInfo]=useState({});
+const Comment = ({ comment, onLike, onReply, comments, isReply, handleDelete, handleEdit, sortBy, getUserInfo}) => {
+  const[userInfo]=useState(getUserInfo(comment));
   const[replyMode, setReplyMode]=useState(false);
   const [editMode, setEditMode]=useState(false);
-useEffect(()=>{
-  console.log(sortBy);
-}, [sortBy]);
+
   //to handle edit process
   const onEditClick=(commentId,replyText)=>{
     handleEdit(commentId, replyText);
@@ -46,23 +49,6 @@ const handleReply=(commentId, replyText)=>{
   onReply(commentId,replyText)
   setReplyMode(false);
 }
-
-// useEffect to fetch userInfo details of function is mentioned in helper.ts
-  useEffect(()=>{
-  if(isReply){
-    const userInfo=getUserInfo(comment.postedBy)[0];
-    const parentComment=comments.filter(item=>comment.parentCommentId===item.id);
-    const parentUser=getUserInfo(parentComment[0].postedBy)[0];
-    setUserInfo({
-      postedBy:userInfo,
-      replyingTo:parentUser
-    })
-  }else{
-setUserInfo({
-  postedBy:getUserInfo(comment.postedBy)[0]
-})
-  }
-  }, [isReply, comment, comments]);
   
   return (
 <div className={styles.container}>
@@ -102,6 +88,7 @@ setUserInfo({
             handleEdit={handleEdit}                           
             isReply={true}
             sortBy={sortBy}
+            getUserInfo={getUserInfo}
           />
             </div>
         ))}

@@ -27,13 +27,16 @@ const sortOptions=[{
  *  *  * @param { Function} handleDelete
  *   function to handle deleting process
  * *
+ *  *  *  * @param { Function} getUserInfo
+ *   function to get user Information
+ * *
  * * @param {Array<Comment>} comments
  * *
  * @returns { JSX.Element  }
  *  JSX for comments widget
  *
  */
-const CommentWidget = ({ handleDelete, handleEdit, handleReply, onLike, comments}) => {
+const CommentWidget = ({ handleDelete, handleEdit, handleReply, onLike, comments, getUserInfo}) => {
 const [sort, setSort]=useState("postedOn");
 
 //to handle the sorting value by default it is date
@@ -59,6 +62,7 @@ setSort(value)
           isReply={false}
           sortBy={sort}
           comments={comments}
+          getUserInfo={getUserInfo}
         />
         </div>
       ))}

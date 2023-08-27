@@ -1,29 +1,3 @@
-import { userInfo } from "../../utils/sampleData";
-
-/**
- * Handles the editing of the comments
- *
- * @param { objectId } userId
- *   id of the comment to be edited
- **
- * @returns { Array<User> }
- *  returns the user matching the userId
- *
- */
-export const getUserInfo = (userId) => {
-  return userInfo.filter((user) => user.id === userId);
-};
-
-/**
- * Handles the editing of the comments
- *
- * @param { Date } postedDate
- *   id of the comment to be edited
- **
- * @returns { String}
- *  returns the String value of time elpased between present time and time of posting
- *
- */
 export const getDuration = (postedDate) => {
   const currentTime = new Date();
   const diffInSeconds = Math.floor((currentTime - new Date(postedDate)) / 1000);
