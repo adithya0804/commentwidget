@@ -53,5 +53,4 @@ The Comment Widget component is a React component that provides a user-friendly 
 
 - Pagination-feature can be added easily to the component to load only the specified number initially which can be passed as props and show a load more button to load the next list of comments
 - The buttons can be replaced with Icons to improve UX
-- The component can be made more responsive
-  
+- The component can be made more responsive 
